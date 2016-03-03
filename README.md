@@ -1,15 +1,13 @@
-# VIM Configuration
+### VIM Configuration
 
 This repository contains all my vim configurations
 
-## Installation
+### Installation
 1. Clone this [Repository] recursively in the home folder
-
 
 ```bash
    $ git clone [Repository] --recursive
 ```
-
 2. Rename the vim folder to **.vim** folder
 ```bash
    $ mv ~/.vim ~/.vim-old
