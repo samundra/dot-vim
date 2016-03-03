@@ -37,20 +37,20 @@ set ruler
 let mapleader=","
 
 "Decrease the lag after typing the leader and command key
-set timeoutlen=500
+set timeoutlen=700
 
 "Switch between buffers without saving
 set hidden
 
 "Set the color scheme. Change this to your preference.
 "Here's 100 to choose from 
-colorscheme delek
+colorscheme torte
 
 "Set font type and size. Depends on the resolution
 "set guifont=Menlo:h14
 
 "Tab stuff
-set tabstop=3
+set tabstop=4
 set shiftwidth=3
 set softtabstop=3
 set expandtab
@@ -72,7 +72,7 @@ set autoindent
 set laststatus=2
 
 "Prefer a slightly higher line height
-set linespace=3
+set linespace=5
 
 "Better line wrapping 
 set nolist
@@ -81,7 +81,7 @@ set linebreak
 set textwidth=79
 set formatoptions=qrnl
 
-"Set incremental seraching"
+"Set incremental searching"
 set incsearch
 
 "Highlight searching
