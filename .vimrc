@@ -129,6 +129,8 @@ set wildmenu
 
 " Map escape key to jj -- much fastemor
 imap jj <esc>
+let g:NERDTreeDirArrowExpandable = "▸"
+let g:NERDTreeDirArrowExpandable = "▾"
 
 " Source the vimrc file after saving it. This way we don't have to reload it
 if has("autocmd")
@@ -143,7 +145,8 @@ execute pathogen#infect()
 
 " NERDTREE PLUGIN SETTINGS
 " Shortcut for NERDTreeToggle
-nmap <leader>nt :NERDTreeToggle <CR>
+"nmap <leader>nt :NERDTreeToggle <CR>
+map <C-n> :NERDTreeToggle<CR>
 
 "Show hidden files in NerdTree
 let NERDTreeShowHidden=1
@@ -169,3 +172,28 @@ au FocusLost * :wa
 nnoremap <leader>v V`]
 set visualbell t_vb= "turn off error beef/flash
 set novisualbell "turn off visual bell
+
+" Close NerdTree when it's the only window open
+function! NERDTreeQuit()
+  redir => buffersoutput
+  silent buffers
+  redir END
+"                     1BufNo  2Mods.     3File           4LineNo
+  let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
+  let windowfound = 0
+
+  for bline in split(buffersoutput, "\n")
+    let m = matchlist(bline, pattern)
+
+    if (len(m) > 0)
+      if (m[2] =~ '..a..')
+        let windowfound = 1
+      endif
+    endif
+  endfor
+
+  if (!windowfound)
+    quitall
+  endif
+endfunction
+autocmd WinEnter * call NERDTreeQuit()
