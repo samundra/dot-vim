@@ -3,6 +3,20 @@
 Spacegray is a colorscheme for Vim loosely modeled after
 the [spacegray](https://github.com/zdne/spacegray-xcode) theme for Xcode.
 
+## Options
+
+You can tweak Spacegray by enabling the following disabled options:
+
+1. Underlined Search: Underline search text instead of using highlight color.
+   Put the following in your `~/.vimrc` to enable it:
+
+  > `let g:spacegray_underline_search = 1`
+
+2. Italic Comments: Italicize comments (_note_: vim requires terminal support).
+   Put the following in your `~/.vimrc` to enable it:
+
+  > `let g:spacegray_italicize_comments = 1`
+
 ## Screenshots
 
 Here are a few screenshots of Spacegray:

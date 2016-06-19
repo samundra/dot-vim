@@ -1,3 +1,6 @@
+" Enable vim-pathogen
+execute pathogen#infect()
+
 " Enable filetype
 filetype off
 filetype plugin on
@@ -34,7 +37,7 @@ set autowrite
 set ruler
 
 "Want a different map leader than \
-let mapleader=","
+"let mapleader=","
 
 "Decrease the lag after typing the leader and command key
 set timeoutlen=700
@@ -44,7 +47,8 @@ set hidden
 
 "Set the color scheme. Change this to your preference.
 "Here's 100 to choose from 
-colorscheme torte
+"colorscheme torte
+colorscheme spacegray
 
 "Set font type and size. Depends on the resolution
 "set guifont=Menlo:h14
@@ -119,8 +123,6 @@ set splitbelow
 "Shortcut for editing vimrc file in a new tab
 nmap <leader>ev :tabedit $MYVIMRC<cr>
 
-" Automatically change current directory to that of the file in
-autocmd BufEnter * cd %:p:h
 
 "Map code completion to ,+tab
 imap <leader> <tab> <C-x> <C-o>
@@ -140,8 +142,6 @@ if has("autocmd")
    augroup END
 endif
 
-" Enable vim-pathogen
-execute pathogen#infect()
 
 " NERDTREE PLUGIN SETTINGS
 " Shortcut for NERDTreeToggle
@@ -160,14 +160,12 @@ autocmd VimEnter * wincmd p
 nmap <leader>hm :cd ~/ <CR>
 
 " Get rid of search highlighting once done
-nnoremap <silent> <esc> :noh<CR><esc>
+" nnoremap <silent> <esc> :noh<CR><esc>
 "set list
 " Remap j & k for friendly movement    
 nnoremap j gj
 nnoremap k gk
 
-" Save on lost focus
-au FocusLost * :wa
 " Reselect text
 nnoremap <leader>v V`]
 set visualbell t_vb= "turn off error beef/flash
@@ -197,3 +195,11 @@ function! NERDTreeQuit()
   endif
 endfunction
 autocmd WinEnter * call NERDTreeQuit()
+" Automatically change current directory to that of the file in
+autocmd BufEnter * cd %:p:h
+" disable the backup
+"set nobackup
+"set nowritebackup
+" show the whitespace characters
+"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+"set list
