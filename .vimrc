@@ -8,12 +8,12 @@ filetype indent on
 syntax on
 
 set nocompatible
+" Disable modelines
 set modelines=0
 
 " Set Common platforms
 set encoding=utf-8
 set scrolloff=3
-set showmode
 "set visualbell
 "set cursorline
 
@@ -21,13 +21,8 @@ set ttyfast
 set ruler
 set undofile
 "set gdefault
-" Perl/Python Regex compatible vi regex
-nnoremap / /\v
-vnoremap / /\v
-nnoremap <tab> %
-vnoremap <tab> %
-" Show matching brackets
 
+" Show matching brackets
 set showmatch
 
 "Write the old file out when switching between the files.
@@ -45,22 +40,27 @@ set timeoutlen=700
 "Switch between buffers without saving
 set hidden
 
-"Set the color scheme. Change this to your preference.
-"Here's 100 to choose from 
-"colorscheme torte
-colorscheme spacegray
+" PaperColor theme
+colorscheme PaperColor
+" Enable Dark background mode
+set background=dark
+set colorcolumn=80
+set colorcolumn=+1,+10,+20
+
 
 "Set font type and size. Depends on the resolution
 "set guifont=Menlo:h14
 
 "Tab stuff
+set softtabstop=4
 set tabstop=4
-set shiftwidth=3
-set softtabstop=3
+set shiftwidth=4
 set expandtab
 
 "Show commabd in bottom right portion of the screen
 set showcmd
+" Show the various modes
+set showmode
 
 "Show line numbers
 set number
@@ -82,52 +82,72 @@ set linespace=5
 set nolist
 set wrap
 set linebreak
-set textwidth=79
+set textwidth=72
 set formatoptions=qrnl
 
-"Set incremental searching"
+"Search specifics
 set incsearch
-
-"Highlight searching
 set hlsearch
 
-"case insensitive search
-set ignorecase
+set ignorecase "case insensitive search
 set smartcase
 
 "Hide MacVim toolbar by default
 set go-=T
 
-"Hard-wrap paragraph of text
-nnoremap <leader>q gqip
 
-"Enable code folding
+"Enable Fold
 set foldenable
+"Temporary open the fold
+set foldopen&
+"Autoclose the fold when focus is lost
+set foldclose=all
+"By default use indentation for the fold
+set foldmethod=indent
 
 "Hide mouse while typing
 set mousehide
+
+"Split windows below the current window.
+set splitbelow
+
+"Map code completion to ,+tab
+"imap <leader> <tab> <C-x> <C-o>
+" More useful command-line completion
+set wildmenu
+
+" show the whitespace characters
+" space is not available in all versions
+set listchars=eol:$,tab:>-,space:.,trail:-
+",trail:~,extends:>,precedes:<
+set list
+" Enable Foldcolumn highlighter
+set foldcolumn=4
+" Increase history
+
+" Perl/Python Regex compatible vi regex
+nnoremap / /\v
+vnoremap / /\v
+nnoremap <tab> %
+vnoremap <tab> %
+
+"Hard-wrap paragraph of text
+nnoremap <leader>q gqip
+nnoremap <silent> <esc> :nohl<CR><esc>
 
 "Shortcut to fold tags with leader (usually \) + ft
 nnoremap <leader>ft Vatzf
 
 "Opens a vertical split and switches over (\v)
 nnoremap <leader>v <C-2>v<C-w>l
-
-"Split windows below the current window.
-set splitbelow
-
-
 "session settings
 "set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds
 
 "Shortcut for editing vimrc file in a new tab
-nmap <leader>ev :tabedit $MYVIMRC<cr>
+nmap <silent> <leader>ev :tabedit $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <leader>t :tabnext<CR>
 
-
-"Map code completion to ,+tab
-imap <leader> <tab> <C-x> <C-o>
-" More useful command-line completion
-set wildmenu
 
 " Map escape key to jj -- much fastemor
 imap jj <esc>
@@ -170,6 +190,7 @@ nnoremap k gk
 nnoremap <leader>v V`]
 set visualbell t_vb= "turn off error beef/flash
 set novisualbell "turn off visual bell
+let g:airline_powerline_fonts = 1
 
 " Close NerdTree when it's the only window open
 function! NERDTreeQuit()
@@ -194,12 +215,8 @@ function! NERDTreeQuit()
     quitall
   endif
 endfunction
+
 autocmd WinEnter * call NERDTreeQuit()
 " Automatically change current directory to that of the file in
 autocmd BufEnter * cd %:p:h
-" disable the backup
-"set nobackup
-"set nowritebackup
-" show the whitespace characters
-"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
-"set list
+
