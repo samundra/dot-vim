@@ -125,15 +125,15 @@ set list
 set foldcolumn=4
 " Increase history
 
+" Set ignore list
+set wildignore=*.swap,*.pyc,*.class
 " Perl/Python Regex compatible vi regex
 nnoremap / /\v
-vnoremap / /\v
 nnoremap <tab> %
-vnoremap <tab> %
 
 "Hard-wrap paragraph of text
 nnoremap <leader>q gqip
-nnoremap <silent> <esc> :nohl<CR><esc>
+"nnoremap <silent> <esc> :nohl<CR><esc>
 
 "Shortcut to fold tags with leader (usually \) + ft
 nnoremap <leader>ft Vatzf
