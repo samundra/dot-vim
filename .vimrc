@@ -74,6 +74,8 @@ set autoindent
 
 "Always show the status line
 set laststatus=2
+set showtabline=2
+set guioptions-=e
 
 "Prefer a slightly higher line height
 set linespace=5
