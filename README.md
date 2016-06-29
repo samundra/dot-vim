@@ -28,7 +28,7 @@ All plugins are managed through [Pathogen].
 - vim-surround
 
 ### Installation
-1. Clone this [Repository] recursively in the home folder
+- Clone this [Repository] recursively in the home folder
 
 ```shell
    $ git clone [Repository] --recursive
@@ -36,13 +36,20 @@ All plugins are managed through [Pathogen].
 _Always use the `git submodule init` and `git submodule update` to
  update the local repository._
 
-2. Rename the `vim` folder to **.vim** folder, if you already have .vim
-   folder then you might need to adjust accordingly.
+- Rename the `vim` folder to **.vim** folder, if you already have `.vim`
+  folder then you might need to adjust accordingly.
 
 ```shell
-   $ mv ~/.vim ~/.vim-old
-   $ mv vim .vim
-   $ mv vim ~/.vim
+    # Rename old vim
+    $ mv ~/.vim ~/.vim-old
+    $ mv vim .vim
+    $ mv vim ~/.vim
+    # Pull plugins
+    $ cd .vim && git submodule init && git submodule update 
+```
+- Create symlink to the `.vimrc` file
+```shell
+    $ ln -s /home/{user}/.vim/vimrc /home/{user}/.vimrc
 ```
 
 ### Include pathogen in .vimrc config file
