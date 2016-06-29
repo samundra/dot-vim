@@ -4,9 +4,6 @@
 [submodule "bundle/vim-sensible"]
     path = bundle/vim-sensible
     url = git://github.com/tpope/vim-sensible.git
-[submodule "bundle/Spacegray.vim"]
-    path = bundle/Spacegray.vim
-    url = git://github.com/ajh17/Spacegray.vim.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
