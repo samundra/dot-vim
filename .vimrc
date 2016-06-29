@@ -18,7 +18,6 @@ set scrolloff=3
 "set cursorline
 
 set ttyfast
-set ruler
 set undofile
 "set gdefault
 
@@ -59,6 +58,7 @@ set expandtab
 
 "Show commabd in bottom right portion of the screen
 set showcmd
+
 " Show the various modes
 set showmode
 
@@ -126,6 +126,10 @@ set list
 " Enable Foldcolumn highlighter
 set foldcolumn=4
 " Increase history
+
+" Keep separate backup directory
+set nobackup
+set backupcopy=no
 
 " Set ignore list
 set wildignore=*.swap,*.pyc,*.class,node_modules/
@@ -237,3 +241,4 @@ for c in range(char2nr('A'), char2nr('Z'))
 endfor
 " Kill the capslock when leaving insert mode.
 autocmd InsertLeave * set iminsert=0
+
