@@ -31,3 +31,6 @@
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/Spacegray.vim"]
+	path = bundle/Spacegray.vim
+	url = git://github.com/ajh17/Spacegray.vim.git
