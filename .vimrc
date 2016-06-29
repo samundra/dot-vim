@@ -1,6 +1,7 @@
 " Enable vim-pathogen
 execute pathogen#infect()
 
+set encoding=utf8
 " Enable filetype
 filetype off
 filetype plugin on
@@ -12,7 +13,6 @@ set nocompatible
 set modelines=0
 
 " Set Common platforms
-set encoding=utf-8
 set scrolloff=3
 "set visualbell
 "set cursorline
@@ -49,7 +49,7 @@ set colorcolumn=+1,+10,+20
 
 
 "Set font type and size. Depends on the resolution
-"set guifont=Menlo:h14
+set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline\ 12
 
 "Tab stuff
 set softtabstop=4
@@ -126,7 +126,7 @@ set foldcolumn=4
 " Increase history
 
 " Set ignore list
-set wildignore=*.swap,*.pyc,*.class
+set wildignore=*.swap,*.pyc,*.class,node_modules/
 " Perl/Python Regex compatible vi regex
 nnoremap / /\v
 nnoremap <tab> %
@@ -190,6 +190,7 @@ nnoremap k gk
 nnoremap <leader>v V`]
 set visualbell t_vb= "turn off error beef/flash
 set novisualbell "turn off visual bell
+" Enable powerline fonts
 let g:airline_powerline_fonts = 1
 
 " Close NerdTree when it's the only window open
@@ -220,3 +221,17 @@ autocmd WinEnter * call NERDTreeQuit()
 " Automatically change current directory to that of the file in
 autocmd BufEnter * cd %:p:h
 
+if exists(":Tabularize")
+    nmap <C-S-a> :Tabularize /=<CR>
+    vmap <C-S-a> :Tabularize /=<CR>
+endif
+"ignore node_modules in the ctrlp plugins
+let g:ctrlp_custom_ignore = 'node_modules\|git'
+"Prevent capslock key
+" Execute 'lnoremap x X' and 'lnoremap X x' for each letter a-z.
+for c in range(char2nr('A'), char2nr('Z'))
+  execute 'lnoremap ' . nr2char(c+32) . ' ' . nr2char(c)
+  execute 'lnoremap ' . nr2char(c) . ' ' . nr2char(c+32)
+endfor
+" Kill the capslock when leaving insert mode.
+autocmd InsertLeave * set iminsert=0
