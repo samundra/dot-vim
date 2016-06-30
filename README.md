@@ -1,8 +1,16 @@
-### VIM Configuration
+#### VIM Configuration
 
-This repository contains all my vim configurations
+This repository contains all my vim configurations. 
+> Tested version - **VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 18 2015 21:31:31)**
 
-### Requirements
+#### You can use ppa to install vim from 
+
+```shell
+$ sudo add-apt-repository ppa:pkg-vim/vim-daily
+$ sudo apt-get update && sudo apt-get upgrade
+```
+
+#### Requirements
 - [Pathogen] is used to manage the plugins. Follow pathogen
   documentation to install it.
 - After [Pathogen] is installed proceed with installation process below.
@@ -10,10 +18,10 @@ This repository contains all my vim configurations
   repository. I have used the *Meslo LG S DZ for Powerline*
 - All vim plugins are are organized as git submodules.
 
-### VIM Plugin Mangement
+#### VIM Plugin Mangement
 All plugins are managed through [Pathogen].
 
-### Plugins included as submodules
+#### Plugins included as submodules
 - ctrlp.vim
 - nerdtree
 - papercolor-theme
@@ -27,7 +35,7 @@ All plugins are managed through [Pathogen].
 - vim-sensible
 - vim-surround
 
-### Installation
+#### Installation
 - Clone this [Repository] recursively in the home folder
 
 ```shell
@@ -52,7 +60,7 @@ _Always use the `git submodule init` and `git submodule update` to
     $ ln -s /home/{user}/.vim/vimrc /home/{user}/.vimrc
 ```
 
-### Include pathogen in .vimrc config file
+#### Include pathogen in .vimrc config file
 - Install pathogen use [Pathogen]
 - Add `execute pathogen#infect()`
 
@@ -62,3 +70,4 @@ the repository recursively._
 [Repository]:https://github.com/samundra/vim.git
 [Pathogen]:https://github.com/tpope/vim-pathogen#installation
 [Patched Fonts]:https://github.com/ryanoasis/nerd-fonts
+
