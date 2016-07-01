@@ -59,9 +59,15 @@ the repository recursively._
     $ cd .vim && git submodule init && git submodule update 
 ```
 - Create symlink to the `.vimrc` file
+- replace `{user}` with your username in below command.
+
 ```shell
+    # Create symlink to .vimrc -> .vim/vimrc file
     $ ln -s /home/{user}/.vim/vimrc /home/{user}/.vimrc
 ```
+#### Verify the installation
+- Those all are the steps required, now run `vim` from the terminal and
+  verify that everything is working as expected.
 
 #### Include pathogen in .vimrc config file (optional)
 > This has already been included in .vimrc with on this repository. It
