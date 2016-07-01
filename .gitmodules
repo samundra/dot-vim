@@ -34,3 +34,6 @@
 [submodule "bundle/Spacegray.vim"]
 	path = bundle/Spacegray.vim
 	url = git://github.com/ajh17/Spacegray.vim.git
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = git://github.com/airblade/vim-gitgutter.git

@@ -32,6 +32,7 @@ All plugins are managed through [Pathogen].
 - vim-airline-themes
 - vim-devicons
 - vim-fugitive
+- vim-gitgutter
 - vim-sensible
 - vim-surround
 
