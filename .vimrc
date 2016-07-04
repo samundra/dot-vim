@@ -2,8 +2,9 @@
 execute pathogen#infect()
 
 set encoding=utf8
+
 " Enable filetype
-filetype off
+filetype on
 filetype plugin on
 filetype indent on
 syntax on
@@ -45,7 +46,6 @@ colorscheme PaperColor
 set background=dark
 set colorcolumn=80
 set colorcolumn=+1,+10,+20
-
 
 "Set font type and size. Depends on the resolution
 set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline\ 12
@@ -90,13 +90,11 @@ set formatoptions=qrnl
 "Search specifics
 set incsearch
 set hlsearch
-
 set ignorecase "case insensitive search
 set smartcase
 
 "Hide MacVim toolbar by default
 set go-=T
-
 
 "Enable Fold
 set foldenable
@@ -106,6 +104,8 @@ set foldopen&
 set foldclose=all
 "By default use indentation for the fold
 set foldmethod=indent
+" Enable Foldcolumn highlighter
+set foldcolumn=4
 
 "Hide mouse while typing
 set mousehide
@@ -123,13 +123,11 @@ set wildmenu
 set listchars=eol:$,tab:>-,space:.,trail:-
 ",trail:~,extends:>,precedes:<
 set list
-" Enable Foldcolumn highlighter
-set foldcolumn=4
 " Increase history
 
-" Keep separate backup directory
+" Disable backup copies
 set nobackup
-set backupcopy=no
+set nowritebackup
 
 " Set ignore list
 set wildignore=*.swap,*.pyc,*.class,node_modules/
@@ -189,8 +187,13 @@ nmap <leader>hm :cd ~/ <CR>
 " nnoremap <silent> <esc> :noh<CR><esc>
 "set list
 " Remap j & k for friendly movement    
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
+
+" Tabularize Keybindings
+nmap <f5> :Tabularize /=<CR>
+imap <f5> :Tabularize /=<CR>
+vmap <f5> :Tabularize /=<CR>
 
 " Reselect text
 nnoremap <leader>v V`]
@@ -227,10 +230,7 @@ autocmd WinEnter * call NERDTreeQuit()
 " Automatically change current directory to that of the file in
 autocmd BufEnter * cd %:p:h
 
-if exists(":Tabularize")
-    nmap <C-S-a> :Tabularize /=<CR>
-    vmap <C-S-a> :Tabularize /=<CR>
-endif
+
 "ignore node_modules in the ctrlp plugins
 let g:ctrlp_custom_ignore = 'node_modules\|git'
 "Prevent capslock key
