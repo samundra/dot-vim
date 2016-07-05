@@ -22,7 +22,9 @@ $ sudo apt-get update && sudo apt-get upgrade
 All plugins are managed through [Pathogen].
 
 #### Plugins included as submodules
+- auto-pairs
 - ctrlp.vim
+- nerdcommenter
 - nerdtree
 - papercolor-theme
 - Spacegray.vim
