@@ -3,6 +3,8 @@
 This repository contains all my vim configurations. 
 > Tested version - **VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 18 2015 21:31:31)**
 
+![VIM Configuration](https://scontent.fbkk5-1.fna.fbcdn.net/v/t1.0-9/13557690_1154512707932004_6023468184144558257_n.png?oh=33c39553852f51eb30b5108254e2932b&oe=588550F4)
+
 #### You can use ppa to install vim from 
 
 ```shell
