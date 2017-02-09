@@ -1,11 +1,12 @@
 #### VIM Configuration
 
-This repository contains all my vim configurations. 
+This repository contains my vim configurations.
 > Tested version - **VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 18 2015 21:31:31)**
 
-![VIM Configuration](https://scontent.fbkk5-1.fna.fbcdn.net/v/t1.0-9/13557690_1154512707932004_6023468184144558257_n.png?oh=33c39553852f51eb30b5108254e2932b&oe=588550F4)
+![VIM
+Configuration](https://cloud.githubusercontent.com/assets/760855/22799834/ca4429de-ef39-11e6-8866-c5968a0dc5c4.png)
 
-#### You can use ppa to install vim from 
+#### You can use ppa to install vim from
 
 ```shell
 $ sudo add-apt-repository ppa:pkg-vim/vim-daily
@@ -13,6 +14,7 @@ $ sudo apt-get update && sudo apt-get upgrade
 ```
 
 #### Requirements
+
 - [Pathogen] is used to manage the plugins. Follow pathogen
   documentation to install it.
 - After [Pathogen] is installed proceed with installation process below.
@@ -52,6 +54,15 @@ the repository recursively._
 > you can also use the `git submodule init` and `git submodule update` to
 > update the local repository.
 
+#### Update submodules manually
+
+```bash
+1. git submodule foreach git fetch --all
+2. git submodule foreach git reset --hard origin/master
+```
+
+#### use newly downloaded vim configuration
+
 - Rename the `vim` folder to **.vim** folder, if you already have `.vim`
   folder then you might need to adjust accordingly.
 
@@ -74,7 +85,8 @@ the repository recursively._
 - Those all are the steps required, now run `vim` from the terminal and
   verify that everything is working as expected.
 
-#### Include pathogen in .vimrc config file (optional)
+#### Optional
+- Include pathogen in .vimrc config file.
 > This has already been included in .vimrc with on this repository. It
 > has been included here as reference purpose only.
 
