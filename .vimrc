@@ -41,14 +41,16 @@ set timeoutlen=700
 set hidden
 
 " PaperColor theme
+set t_Co=256
+set background=dark
 colorscheme PaperColor
 " Enable Dark background mode
-set background=dark
 set colorcolumn=80
 set colorcolumn=+1,+10,+20
 
 "Set font type and size. Depends on the resolution
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline\ 12
+"set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h12
+"set guifont=Source\ Code\ Pro\ ExtraLight:h15
 
 "Tab stuff
 set softtabstop=4
@@ -120,7 +122,7 @@ set wildmenu
 
 " show the whitespace characters
 " space is not available in all versions
-set listchars=eol:$,tab:>-,space:.,trail:-
+set listchars=tab:>-,space:.,trail:-
 ",trail:~,extends:>,precedes:<
 set list
 " Increase history
@@ -170,7 +172,8 @@ endif
 " NERDTREE PLUGIN SETTINGS
 " Shortcut for NERDTreeToggle
 "nmap <leader>nt :NERDTreeToggle <CR>
-map <C-n> :NERDTreeToggle<CR>
+map <Leader>n <esc>:NERDTreeToggle<CR>
+map <Leader>r <esc>:NERDTreeFind<CR>
 
 "Show hidden files in NerdTree
 let NERDTreeShowHidden=1
@@ -241,4 +244,7 @@ for c in range(char2nr('A'), char2nr('Z'))
 endfor
 " Kill the capslock when leaving insert mode.
 autocmd InsertLeave * set iminsert=0
+
+" Unix line ending
+set ff=unix
 
