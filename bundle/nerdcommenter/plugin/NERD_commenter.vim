@@ -79,6 +79,7 @@ let s:delimiterMap = {
     \ 'amiga': { 'left': ';' },
     \ 'aml': { 'left': '/*' },
     \ 'ampl': { 'left': '#' },
+    \ 'ansible': { 'left': '#' },
     \ 'apache': { 'left': '#' },
     \ 'apachestyle': { 'left': '#' },
     \ 'applescript': { 'left': '--', 'leftAlt': '(*', 'rightAlt': '*)' },
@@ -92,7 +93,8 @@ let s:delimiterMap = {
     \ 'asterisk': { 'left': ';' },
     \ 'asy': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'atlas': { 'left': 'C', 'right': '$' },
-    \ 'autohotkey': { 'left': ';' },
+    \ 'augeas': { 'left': '(*', 'right': '*)' },
+    \ 'autohotkey': { 'left': ';', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'autoit': { 'left': ';' },
     \ 'ave': { 'left': "'" },
     \ 'awk': { 'left': '#' },
@@ -191,6 +193,7 @@ let s:delimiterMap = {
     \ 'gentoo-package-use': { 'left': '#' },
     \ 'gitcommit': { 'left': '#' },
     \ 'gitconfig': { 'left': ';' },
+    \ 'gitignore': { 'left': '#' },
     \ 'gitrebase': { 'left': '#' },
     \ 'gnuplot': { 'left': '#' },
     \ 'go': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -205,6 +208,7 @@ let s:delimiterMap = {
     \ 'hb': { 'left': '#' },
     \ 'hbs': { 'left': '{{!-- ', 'right': ' --}}' },
     \ 'hercules': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'hive': { 'left': '-- ' },
     \ 'hog': { 'left': '#' },
     \ 'hostsaccess': { 'left': '#' },
     \ 'htmlcheetah': { 'left': '##' },
@@ -217,6 +221,7 @@ let s:delimiterMap = {
     \ 'idl': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'idlang': { 'left': ';' },
     \ 'idris': { 'leftAlt': '--', 'left': '{-', 'right': '-}' },
+    \ 'incar': { 'left': '!' },
     \ 'inform': { 'left': '!' },
     \ 'inittab': { 'left': '#' },
     \ 'ishd': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
@@ -254,6 +259,7 @@ let s:delimiterMap = {
     \ 'lua': { 'left': '--', 'leftAlt': '--[[', 'rightAlt': ']]' },
     \ 'lynx': { 'left': '#' },
     \ 'lytex': { 'left': '%' },
+    \ 'm4': { 'left': 'dnl ' },
     \ 'mail': { 'left': '> ' },
     \ 'mako': { 'left': '##' },
     \ 'man': { 'left': '."' },
@@ -274,6 +280,7 @@ let s:delimiterMap = {
     \ 'moduala.': { 'left': '(*', 'right': '*)' },
     \ 'modula2': { 'left': '(*', 'right': '*)' },
     \ 'modula3': { 'left': '(*', 'right': '*)' },
+    \ 'molpro': { 'left': '!' },
     \ 'monk': { 'left': ';' },
     \ 'mush': { 'left': '#' },
     \ 'mustache': { 'left': '{{!', 'right': '}}' },
@@ -319,6 +326,7 @@ let s:delimiterMap = {
     \ 'plm': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'plsql': { 'left': '-- ', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'po': { 'left': '#' },
+    \ 'poscar': { 'left': '!' },
     \ 'postscr': { 'left': '%' },
     \ 'pov': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
     \ 'povini': { 'left': ';' },
@@ -429,6 +437,7 @@ let s:delimiterMap = {
     \ 'uil': { 'left': '!' },
     \ 'upstart': { 'left': '#' },
     \ 'vala': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
+    \ 'vasp': { 'left': '!' },
     \ 'vb': { 'left': "'" },
     \ 'velocity': { 'left': "##", 'right': "", 'leftAlt': '#*', 'rightAlt': '*#' },
     \ 'vera': { 'left': '/*','right': '*/', 'leftAlt': '//' },
@@ -745,6 +754,10 @@ function s:CommentBlock(top, bottom, lSide, rSide, forceNested )
                 let theLine = s:ConvertLeadingSpacesToTabs(theLine)
             endif
 
+            if g:NERDTrimTrailingWhitespace == 1
+              let theLine = s:TrimTrailingWhitespace(theLine)
+            endif
+
             call setline(currentLine, theLine)
         endif
 
@@ -815,6 +828,10 @@ function s:CommentLines(forceNested, align, firstLine, lastLine)
             let theLine = s:ConvertLeadingSpacesToTabs(theLine)
         endif
 
+        if g:NERDTrimTrailingWhitespace == 1
+            let theLine = s:TrimTrailingWhitespace(theLine)
+        endif
+
         " we are done with this line
         call setline(currentLine, theLine)
         let currentLine = currentLine + 1
@@ -875,6 +892,11 @@ function s:CommentLinesMinimal(firstLine, lastLine)
     if lineHasLeadingTabs
         let theLine = s:ConvertLeadingSpacesToTabs(theLine)
     endif
+
+    if g:NERDTrimTrailingWhitespace == 1
+        let theLine = s:TrimTrailingWhitespace(theLine)
+    endif
+
     call setline(a:lastLine, theLine)
 endfunction
 
@@ -994,6 +1016,9 @@ function s:CommentLinesSexy(topline, bottomline)
             let theLine = s:ConvertLeadingSpacesToTabs(theLine)
         endif
 
+        if g:NERDTrimTrailingWhitespace == 1
+            let theLine = s:TrimTrailingWhitespace(theLine)
+        endif
 
         " set the line and move onto the next one
         call setline(currentLine, theLine)
@@ -1046,6 +1071,10 @@ function s:CommentLinesToggle(forceNested, firstLine, lastLine)
         " restore leading tabs if appropriate
         if lineHasLeadingTabs
             let theLine = s:ConvertLeadingSpacesToTabs(theLine)
+        endif
+
+        if g:NERDTrimTrailingWhitespace == 1
+            let theLine = s:TrimTrailingWhitespace(theLine)
         endif
 
         " we are done with this line
@@ -1593,6 +1622,16 @@ function s:UncommentLinesSexy(topline, bottomline)
 
         let theLine = s:SwapOuterPlaceHoldersForMultiPartDelims(theLine)
         call setline(bottomline, theLine)
+    endif
+    
+    " remove trailing whitespaces for first and last line
+    if g:NERDTrimTrailingWhitespace == 1
+        let theLine = getline(a:bottomline)
+        let theLine = s:TrimTrailingWhitespace(theLine)
+        call setline(a:bottomline, theLine)
+        let theLine = getline(a:topline)
+        let theLine = s:TrimTrailingWhitespace(theLine)
+        call setline(a:topline, theLine)
     endif
 endfunction
 
