@@ -46,7 +46,7 @@ All plugins are managed through [Pathogen].
 - Clone this [Repository] recursively in the home folder
 
 ```shell
-   $ git clone [Repository] --recursive
+$ git clone git@github.com:samundra/dot-vim.git --recursive
 ```
 *Note:* _All the plugins are git submodules and thus we have to clone 
 the repository recursively._
@@ -63,7 +63,7 @@ the repository recursively._
 
 #### use newly downloaded vim configuration
 
-- Rename the `vim` folder to **.vim** folder, if you already have `.vim`
+- Rename the `vim` folder to **.vim** folder. If you already have `.vim`
   folder then you might need to adjust accordingly.
 
 ```shell
@@ -90,8 +90,8 @@ the repository recursively._
 > This has already been included in .vimrc with on this repository. It
 > has been included here as reference purpose only.
 
-- Install pathogen use [Pathogen]
-- Add `execute pathogen#infect()`
+- Install pathogen using instructios provided on [Pathogen]
+- Add `execute pathogen#infect()` in .vimrc file
 
 [Repository]:https://github.com/samundra/vim.git
 [Pathogen]:https://github.com/tpope/vim-pathogen#installation

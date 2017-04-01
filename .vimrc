@@ -15,11 +15,11 @@ set modelines=0
 
 " Set Common platforms
 set scrolloff=3
-"set visualbell
-"set cursorline
 
+"set cursorline
 set ttyfast
 set undofile
+
 "set gdefault
 
 " Show matching brackets
@@ -36,6 +36,13 @@ set ruler
 
 "Decrease the lag after typing the leader and command key
 set timeoutlen=700
+
+" Unix line ending
+set ff=unix
+
+" Disable backup copies
+set nobackup
+set nowritebackup
 
 "Switch between buffers without saving
 set hidden
@@ -67,9 +74,6 @@ set showmode
 "Show line numbers
 set number
 
-"Prefer relative line numbering?
-"set relativenumber"
-
 "indet stuff
 set smartindent
 set autoindent
@@ -99,13 +103,13 @@ set smartcase
 set go-=T
 
 "Enable Fold
-set foldenable
+"set foldenable
 "Temporary open the fold
 set foldopen&
 "Autoclose the fold when focus is lost
-set foldclose=all
+"set foldclose=all
 "By default use indentation for the fold
-set foldmethod=indent
+"set foldmethod=indent
 " Enable Foldcolumn highlighter
 set foldcolumn=4
 
@@ -126,10 +130,6 @@ set listchars=tab:>-,space:.,trail:-
 ",trail:~,extends:>,precedes:<
 set list
 " Increase history
-
-" Disable backup copies
-set nobackup
-set nowritebackup
 
 " Set ignore list
 set wildignore=*.swap,*.pyc,*.class,node_modules/
@@ -244,7 +244,4 @@ for c in range(char2nr('A'), char2nr('Z'))
 endfor
 " Kill the capslock when leaving insert mode.
 autocmd InsertLeave * set iminsert=0
-
-" Unix line ending
-set ff=unix
 
