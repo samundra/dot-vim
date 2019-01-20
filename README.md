@@ -33,8 +33,8 @@ $ sudo apt-get update && sudo apt-get upgrade
 
 #### Plugins included as submodules
 
-- [Spacegray.vim](git://github.com/ajh17/Spacegray.vim.git)
-- [auto-pairs](git://github.com/jiangmiao/auto-pairs.git)
+- [Spacegray.vim](https://github.com/ajh17/Spacegray.vim.git)
+- [auto-pairs](https://github.com/jiangmiao/auto-pairs.git)
 - [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
 - [nerdcommenter](https://github.com/scrooloose/nerdcommenter.git)
 - [nerdtree](https://github.com/scrooloose/nerdtree.git)
@@ -44,10 +44,10 @@ $ sudo apt-get update && sudo apt-get upgrade
 - [vim-airline](https://github.com/vim-airline/vim-airline.git)
 - [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
 - [vim-devicons](https://github.com/ryanoasis/vim-devicons)
-- [vim-fugitive](git://github.com/tpope/vim-fugitive.git)
-- [vim-gitgutter](git://github.com/airblade/vim-gitgutter.git)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive.git)
+- [vim-gitgutter](https://github.com/airblade/vim-gitgutter.git)
 - [vim-jsx](https://github.com/mxw/vim-jsx.git)
-- [vim-sensible](git://github.com/tpope/vim-sensible.git)
+- [vim-sensible](https://github.com/tpope/vim-sensible.git)
 - [vim-surround](https://github.com/tpope/vim-surround.git)
 
 ### Get Started
@@ -116,10 +116,10 @@ $ git submodule foreach git reset --hard origin/master
 
 |Keyboard Shortcut|Description|
 |-----------------|-----------|
-|<Leader>n|Toggle NerdTree|
-|<Leader>jj|Escape Key|
-|<Leader>t|Move to next tab|
-|<ctrl>p|Initialize the ctrl-p|
+|`<Leader>n`|Toggle NerdTree|
+|`<Leader>jj`|Escape Key|
+|`<Leader>t`|Move to next tab|
+|`<ctrl>p`|Initialize the ctrl-p|
 
 #### Optional
 
@@ -130,20 +130,23 @@ $ git submodule foreach git reset --hard origin/master
 - Install pathogen using instructios provided on [Pathogen]
 - Add `execute pathogen#infect()` in .vimrc file
 
-#### Troubleshoot Instructions
+### Troubleshoot Instructions
 
 1. Icons are not shown instead square ? marks are shown
-Answer: Icons are being shown by vim-devicons plugins. To work properly,
+
+**Answer**: Icons are being shown by vim-devicons plugins. To work properly,
 it needs Patched Nerd Fonts with all the glyphs. Usually, it's the
 problem with the font in use.
 
-[For Mac User and iTerm]
-- Download the [Patched Nerd Font] and then set it as your terminal
+#### For Mac User and iTerm
+
+- Download the [Patched Nerd Fonts] and then set it as your terminal
   font. Close and re-start the iTerm. If it doesn't solve your problem
   then please refer to [Vim-Devicons Wiki](https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#why-isnt-it-working-how-come-i-dont-see-any-icons). 
-  Since it can happen for multiple reasons, pin-pointing can be tedious.
+  Since it can happen for multiple reasons, pin-pointing the actual problem can be tedious. First make sure that you have the correct font then try to use the right syntax for setting the `guifont` in `.vimrc` file.
+  
+  I will keep updating the keyboard shortcuts when I have some more time. Please feel free to fork it. When you've made some updates, please send PRs.
 
 [Repository]:https://github.com/samundra/vim.git
 [Pathogen]:https://github.com/tpope/vim-pathogen#installation
 [Patched Nerd Fonts]:https://github.com/ryanoasis/nerd-fonts
-
