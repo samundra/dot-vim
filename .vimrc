@@ -49,14 +49,15 @@ set hidden
 
 " PaperColor theme
 set t_Co=256
+" Enable Dark background mode
 set background=dark
 colorscheme PaperColor
-" Enable Dark background mode
 set colorcolumn=80
 set colorcolumn=+1,+10,+20
 
 "Set font type and size. Depends on the resolution
 "set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h12
+set guifont=MesloLGS\ Nerd\ Font:h15
 "set guifont=Source\ Code\ Pro\ ExtraLight:h15
 
 "Tab stuff
