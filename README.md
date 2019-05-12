@@ -2,7 +2,9 @@
 
 This repository contains my vim configurations.
 
-> Tested version - **VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 18 2015 21:31:31)**
+#### Tested versions 
+- VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 18 2015 21:31:31)
+- VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Aug 17 2018 17:24:51)
 
 ![VIM
 Configuration](https://cloud.githubusercontent.com/assets/760855/22799834/ca4429de-ef39-11e6-8866-c5968a0dc5c4.png)
@@ -63,24 +65,25 @@ $ sudo apt-get update && sudo apt-get upgrade
 $ git clone git@github.com:samundra/dot-vim.git --recursive
 ```
 
-Rename `vim` folder to **.vim** folder. If you already have `.vim` 
+Rename `dot-vim` folder to **.vim** folder. If you already have `.vim` 
 folder then you might need to adjust accordingly.
 
 ```shell
     ### Rename old vim
     $ mv ~/.vim ~/.vim-old
-    $ mv vim .vim
-    $ mv vim ~/.vim
+    
+    ### Move new vim
+    $ mv .vim ~/.vim
 
     ### Pull plugins
-    $ cd .vim && git submodule init && git submodule update 
+    $ cd ~/.vim && git submodule init && git submodule update 
 ```
 - Create symlink to the `.vimrc` file
 - replace `{user}` with your username in below command.
 
 ```shell
     ### Create symlink to .vimrc -> .vim/vimrc file
-    $ ln -s /home/{user}/.vim/vimrc /home/{user}/.vimrc
+    $ ln -s ~/.vim/vimrc ~/.vimrc
 ```
 
 ### Verify the installation
@@ -93,8 +96,7 @@ Use git submodule command to update the respective repository.
 
 ```bash
 $ cd ~/.vim/
-$ git submodule init
-$ git submodule update
+$ git submodule init && git submodule update
 ```
 
 OR
@@ -112,7 +114,7 @@ $ git submodule foreach git reset --hard origin/master
 <Leader> \
 ```
 
-##### Keybindings
+##### Key Bindings
 
 |Keyboard Shortcut|Description|
 |-----------------|-----------|
@@ -127,7 +129,7 @@ $ git submodule foreach git reset --hard origin/master
 > This has already been included in .vimrc with on this repository. It
 > has been included here as reference purpose only.
 
-- Install pathogen using instructios provided on [Pathogen]
+- Install pathogen using instructions provided on [Pathogen]
 - Add `execute pathogen#infect()` in .vimrc file
 
 ### Troubleshoot Instructions
