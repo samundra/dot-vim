@@ -51,22 +51,28 @@ Rename `dot-vim` folder to **.vim** folder. If you already have `.vim`
 folder then you might need to adjust accordingly.
 
 ```shell
-    ### Rename old vim
-    $ mv ~/.vim ~/.vim-old
+### Rename old vim
+$ mv ~/.vim ~/.vim-old
 
-    ### Move new vim
-    $ mv .vim ~/.vim
+### Move new vim
+$ mv .vim ~/.vim
 
-    ### Pull plugins
-    $ cd ~/.vim && git submodule init && git submodule update
+### Pull plugins
+$ cd ~/.vim && git submodule init && git submodule update
 ```
 - Create symlink to the `.vimrc` file
 - replace `{user}` with your username in below command.
 
 ```shell
-    ### Create symlink to .vimrc -> .vim/vimrc file
-    $ ln -s ~/.vim/vimrc ~/.vimrc
+### Create symlink to .vimrc -> .vim/vimrc file
+$ ln -s ~/.vim/vimrc ~/.vimrc
 ```
+
+### Open VI and then install plugins
+While opening VI you will get some error for the first time. You can
+ignore it. Once plugins are installed, those errors will go away.
+
+Open VIM `vi` then use `:PlugInstall` to install Plugins
 
 ### Verify the installation
 - Those all are the steps required, now run `vim` from the terminal and
@@ -79,7 +85,7 @@ Use git submodule command to update the respective repository.
 
 ```bash
 $ cd ~/.vim/
-$ git submodule init && git submodule update
+$ git submodule update --init --remote
 ```
 
 OR
