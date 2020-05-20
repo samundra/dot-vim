@@ -1,26 +1,23 @@
 ## VIM Configuration
 
-This repository contains my vim configurations. This configurations
-is most suitable for frontend development using Typescript, ReactJS,
-Javascript, Nodejs.
+This repository contains my vim configurations.
 
-![VIM Configuration](https://user-images.githubusercontent.com/760855/82479131-29af1e80-9afc-11ea-9ca9-07ef3326b5a7.gif)
+#### Tested versions 
+- VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Dec 18 2015 21:31:31)
+- VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Aug 17 2018 17:24:51)
 
-### Features
-- [LightLine] is used for statusbar
-- [Coc] is used for autocomplete, intellisense
-- [ALE] provides linting using Typescript LSP server
-- Syntax highlight support for:
-  - Typescript, Javascript, jsx, tsx, styled components, Graphql
+![VIM
+Configuration](https://cloud.githubusercontent.com/assets/760855/22799834/ca4429de-ef39-11e6-8866-c5968a0dc5c4.png)
 
-### Tested Version
+### ChangeLogs
 
-VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Apr 13 2020 07:46:23)
-macOS version
+- update vim-devicons plugin
+- add vim-jsx plugin for react development
 
-### Ubuntu Installation
+### Ubuntu Instruction
 
-You might have to upgrade your VIM for some plugins to work properly. Instruction for ubuntu is shown below:
+You might have to upgrade your VIM for some plugins to work
+properly. Instruction for ubuntu is shown below:
 
 ```shell
 $ sudo add-apt-repository ppa:pkg-vim/vim-daily
@@ -29,36 +26,57 @@ $ sudo apt-get update && sudo apt-get upgrade
 
 ### How things are organized in this repository?
 
-- [vim-plug] is used to manage the plugins. Please, follow its documentation for installation guidance.
+- [Pathogen] is used to manage the plugins. Please, follow pathogen
+  documentation to install it.
+- After [Pathogen] is installed proceed with installation process below.
+- Install [Patched Nerd Fonts]. Follow the instructions provided in the
+  repository. I have used the [MesloLGS Nerd Font](https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Meslo/S/complete/Meslo%20LG%20S%20Regular%20Nerd%20Font%20Complete.otf)
 - All vim plugins are organized as git submodules.
+
+#### Plugins included as submodules
+
+- [Spacegray.vim](https://github.com/ajh17/Spacegray.vim.git)
+- [auto-pairs](https://github.com/jiangmiao/auto-pairs.git)
+- [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
+- [nerdcommenter](https://github.com/scrooloose/nerdcommenter.git)
+- [nerdtree](https://github.com/scrooloose/nerdtree.git)
+- [papercolor-theme](https://github.com/NLKNguyen/papercolor-theme.git)
+- [tabular](https://github.com/godlygeek/tabular.git)
+- [unite.vim](https://github.com/Shougo/unite.vim.git)
+- [vim-airline](https://github.com/vim-airline/vim-airline.git)
+- [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes.git)
+- [vim-devicons](https://github.com/ryanoasis/vim-devicons)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive.git)
+- [vim-gitgutter](https://github.com/airblade/vim-gitgutter.git)
+- [vim-jsx](https://github.com/mxw/vim-jsx.git)
+- [vim-sensible](https://github.com/tpope/vim-sensible.git)
+- [vim-surround](https://github.com/tpope/vim-surround.git)
 
 ### Get Started
 
-- Clone this repository recursively.
+- Clone this [Repository] recursively in the home folder
 
 > Why Recursively?
 
-```shell
-*Note:* _All the plugins are git submodules and thus we have to clone
-the repository recursively._
-```
+    *Note:* _All the plugins are git submodules and thus we have to clone 
+    the repository recursively._
 
 ```shell
 $ git clone git@github.com:samundra/dot-vim.git --recursive
 ```
 
-Rename `dot-vim` folder to **.vim** folder. If you already have `.vim`
+Rename `dot-vim` folder to **.vim** folder. If you already have `.vim` 
 folder then you might need to adjust accordingly.
 
 ```shell
     ### Rename old vim
     $ mv ~/.vim ~/.vim-old
-
+    
     ### Move new vim
     $ mv .vim ~/.vim
 
     ### Pull plugins
-    $ cd ~/.vim && git submodule init && git submodule update
+    $ cd ~/.vim && git submodule init && git submodule update 
 ```
 - Create symlink to the `.vimrc` file
 - replace `{user}` with your username in below command.
@@ -76,7 +94,6 @@ folder then you might need to adjust accordingly.
 
 Use git submodule command to update the respective repository.
 
-
 ```bash
 $ cd ~/.vim/
 $ git submodule init && git submodule update
@@ -93,43 +110,45 @@ $ git submodule foreach git reset --hard origin/master
 
 `<Leader>` key to ` \ `. So all the shortcut should start with `\` key.
 
-#### Basic Shortcuts
 ```
 <Leader> \
-jj : Escape from insert mode
-<Leader>w : Save buffer to file
-,, : Remove Search highlight
 ```
 
-More companion Keyboard shorts
-- Please note cursor keys are disabled on visual and normal mode.
+##### Key Bindings
 
-Code Formatting
----
-```shell
-<Leader>f : code format using coc plugin
-```
+|Keyboard Shortcut|Description|
+|-----------------|-----------|
+|`<Leader>n`|Toggle NerdTree|
+|`<Leader>jj`|Escape Key|
+|`<Leader>t`|Move to next tab|
+|`<ctrl>p`|Initialize the ctrl-p|
 
-Tab Navigation
----
-```shell
-\\ : Goto next buffer
-\t : Goto next tab
-```
+#### Optional
 
-Window
----
-```shell
-z= : Make Equal width for open windows
-```
+- Include pathogen in .vimrc config file.
+> This has already been included in .vimrc with on this repository. It
+> has been included here as reference purpose only.
+
+- Install pathogen using instructions provided on [Pathogen]
+- Add `execute pathogen#infect()` in .vimrc file
 
 ### Troubleshoot Instructions
 
-If something is not working as expected then please create issue on this
-repository.
+1. Icons are not shown instead square ? marks are shown
 
+**Answer**: Icons are being shown by vim-devicons plugins. To work properly,
+it needs Patched Nerd Fonts with all the glyphs. Usually, it's the
+problem with the font in use.
 
-[vim-plug]: https://github.com/junegunn/vim-plug
-[LightLine]: https://github.com/itchyny/lightline.vim
-[Coc]: https://github.com/neoclide/coc.nvim
-[ALE]: https://github.com/dense-analysis/ale
+#### For Mac User and iTerm
+
+- Download the [Patched Nerd Fonts] and then set it as your terminal
+  font. Close and re-start the iTerm. If it doesn't solve your problem
+  then please refer to [Vim-Devicons Wiki](https://github.com/ryanoasis/vim-devicons/wiki/FAQ-&-Troubleshooting#why-isnt-it-working-how-come-i-dont-see-any-icons). 
+  Since it can happen for multiple reasons, pin-pointing the actual problem can be tedious. First make sure that you have the correct font then try to use the right syntax for setting the `guifont` in `.vimrc` file.
+  
+  I will keep updating the keyboard shortcuts when I have some more time. Please feel free to fork it. When you've made some updates, please send PRs.
+
+[Repository]:https://github.com/samundra/vim.git
+[Pathogen]:https://github.com/tpope/vim-pathogen#installation
+[Patched Nerd Fonts]:https://github.com/ryanoasis/nerd-fonts
