@@ -1,0 +1,17 @@
+snippet rsaga "create saga" b
+import { takeLatest, put, select } from 'redux-saga/effects'
+import { getRecentOrderLine } from './selector'
+
+function* initCheckout() {
+  const orderLine = yield select(getRecentOrderLine)
+  if (orderLine.id) {
+    yield put({ type: 'INIT_CHECKOUT', payload: true })
+  }
+}
+
+function* allSaga() {
+  yield takeLatest('SAVE_PRODUCT', initCheckout)
+}
+
+export default allSaga
+endsnippet

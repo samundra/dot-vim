@@ -1,0 +1,8 @@
+{
+  "coc.preferences.colorSupport": false,
+	"diagnostic.displayByAle": true,
+  "tsserver.trace.server": "verbose",
+  "eslint.autoFixOnSave": false,
+  "eslint.autoFix": false,
+  "eslint.enable": false,
+}
