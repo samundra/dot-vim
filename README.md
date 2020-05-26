@@ -13,7 +13,19 @@ necessary.
 ### Features
 - [LightLine] is used for statusbar
 - [Coc] is used for autocomplete, intellisense
-- [ALE] provides linting using Typescript LSP server
+- [ALE] provides linting using Typescript LSP server and also does the fixings.
+  - Update CoC settings to disable eslint. Let ALE handle linting and fixinig typescript, javascript files.
+  - use VIM command `:CocConfig` and update with below configuration
+  ```bash
+  {
+    "coc.preferences.colorSupport": false,
+    "diagnostic.displayByAle": true,
+    "tsserver.trace.server": "verbose",
+    "eslint.autoFixOnSave": false,
+    "eslint.autoFix": false,
+    "eslint.enable": false,
+  }
+  ```
 - Syntax highlight support for:
   - Typescript, Javascript, jsx, tsx, styled components, Graphql
 
