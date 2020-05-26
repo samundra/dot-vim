@@ -1,8 +1,12 @@
 ## VIM Configuration
 
+### DISCLAIMER
+
 This repository contains my vim configurations. This configurations
 is most suitable for frontend development using Typescript, ReactJS,
-Javascript, Nodejs.
+Javascript, Nodejs. This configuration is as per my workflow and may not
+suit your workflow. So, please feel free to tweak it as you feel
+necessary.
 
 ![VIM Configuration](https://user-images.githubusercontent.com/760855/82479131-29af1e80-9afc-11ea-9ca9-07ef3326b5a7.gif)
 
@@ -18,6 +22,10 @@ Javascript, Nodejs.
 VIM - Vi IMproved 8.2 (2019 Dec 12, compiled Apr 13 2020 07:46:23)
 macOS version
 
+I have tested this configurations on MacOS only and may need tweaking
+for other systems. If you decide to move foward with this configuration
+and get need help please feel free to ping me.
+
 ### Ubuntu Installation
 
 You might have to upgrade your VIM for some plugins to work properly. Instruction for ubuntu is shown below:
@@ -30,21 +38,13 @@ $ sudo apt-get update && sudo apt-get upgrade
 ### How things are organized in this repository?
 
 - [vim-plug] is used to manage the plugins. Please, follow its documentation for installation guidance.
-- All vim plugins are organized as git submodules.
 
 ### Get Started
 
-- Clone this repository recursively.
-
-> Why Recursively?
+- Clone this repository
 
 ```shell
-*Note:* _All the plugins are git submodules and thus we have to clone
-the repository recursively._
-```
-
-```shell
-$ git clone git@github.com:samundra/dot-vim.git --recursive
+$ git clone git@github.com:samundra/dot-vim.git
 ```
 
 Rename `dot-vim` folder to **.vim** folder. If you already have `.vim`
@@ -68,9 +68,9 @@ $ cd ~/.vim && git submodule init && git submodule update
 $ ln -s ~/.vim/vimrc ~/.vimrc
 ```
 
-### Open VI and then install plugins
-While opening VI you will get some error for the first time. You can
-ignore it. Once plugins are installed, those errors will go away.
+### Plugin Installation
+While opening VI you will get some error for the first time. Ignore it.
+Once plugins are installed, those errors will go away.
 
 Open VIM `vi` then use `:PlugInstall` to install Plugins
 
@@ -79,36 +79,22 @@ Open VIM `vi` then use `:PlugInstall` to install Plugins
   verify that everything is working as expected.
 
 ### How do I update plugins (Manually)
+Make changes to [vim-plug] list and then execute vim command
 
-Use git submodule command to update the respective repository.
-
-
-```bash
-$ cd ~/.vim/
-$ git submodule update --init --remote
-```
-
-OR
-
-```bash
-$ git submodule foreach git fetch --all
-$ git submodule foreach git reset --hard origin/master
+```shell
+:PlugClean
 ```
 
 #### Keyboard Shortcuts
+`<Leader>` key set to to ` \ `. So all the shortcut should start with `\` key.
+Don't know what <Leader> key is try `:help leader`
 
-`<Leader>` key to ` \ `. So all the shortcut should start with `\` key.
-
-#### Basic Shortcuts
-```
-<Leader> \
+```shell
+<Leader>\ :  Move to next buffer
 jj : Escape from insert mode
 <Leader>w : Save buffer to file
-,, : Remove Search highlight
+,, : Remove search highlight
 ```
-
-More companion Keyboard shorts
-- Please note cursor keys are disabled on visual and normal mode.
 
 Code Formatting
 ---
@@ -119,20 +105,19 @@ Code Formatting
 Tab Navigation
 ---
 ```shell
-\\ : Goto next buffer
+<Leader>\ : Goto next buffer
 \t : Goto next tab
-```
-
-Window
----
-```shell
-z= : Make Equal width for open windows
 ```
 
 ### Troubleshoot Instructions
 
-If something is not working as expected then please create issue on this
-repository.
+I created this vimrc for my own use. So, I do not expect this to work
+for you out of the box. If it works, that's great, if it doesn't we can
+always tweak it. However, I would be willing to share my
+knowledge on VIM if you get stucked somewhere.
+
+Have feedback for this repository then please create an issue and then
+we can discuss about it.
 
 
 [vim-plug]: https://github.com/junegunn/vim-plug
