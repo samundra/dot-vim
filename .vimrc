@@ -19,7 +19,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'SirVer/ultisnips'
   Plug 'jremmen/vim-ripgrep'
   Plug 'jparise/vim-graphql'
-	Plug 'romainl/Apprentice'
+  Plug 'romainl/Apprentice'
 call plug#end()
 
 filetype plugin indent on
