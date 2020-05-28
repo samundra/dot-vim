@@ -1,5 +1,5 @@
 augroup dotvim
-	autocmd!
+  autocmd!
 augroup END
 
 filetype off
@@ -25,6 +25,7 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
+set expandtab
 set backup
 set backupdir=~/.vim/tmp//,.
 set writebackup
