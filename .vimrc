@@ -1,3 +1,7 @@
+augroup dotvim
+	autocmd!
+augroup END
+
 filetype off
 
 call plug#begin('~/.vim/plugged')
@@ -18,15 +22,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'romainl/Apprentice'
 call plug#end()
 
-augroup MyColors
-    autocmd!
-augroup END
-
 filetype plugin indent on
 syntax on
 
-set nomore
-set rtp+=/usr/local/bin/fzf
 set backup
 set backupdir=~/.vim/tmp//,.
 set writebackup
@@ -70,10 +68,10 @@ set scrolloff=5
 set noerrorbells
 set path-=/usr/include
 set path+=src/**
-set wildignore+=*/node_modules/*,*build/*
 set wildmenu
+set wildignore+=*/node_modules/*,*build/*
 set timeout
-set timeoutlen=600
+set timeoutlen=700
 
 " Enable mouse use in all modes
 set mouse=a
@@ -98,25 +96,7 @@ let &t_SI.="\e[5 q"
 let &t_SR.="\e[4 q"
 let &t_EI.="\e[1 q"
 
-" FZF Color Customizations
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'border':  ['fg', 'Ignore'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-
-" let g:fzf_layout = { 'window': '-tabnew' }
-
-let b:ale_fixers = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
+"let b:ale_fixers = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
 
 let g:ale_sign_column_always=1
 let g:ale_linters_explicit=1
@@ -132,11 +112,6 @@ let g:ale_set_quickfix = 1
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
@@ -155,28 +130,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-" ---
-" Do Contextual Actions based on filetypes, format etc.
-" ---
-" Execute Go file
-au FileType go map <leader>r :!go run %<CR>
+" Update signature help on jump placeholder.
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-" Update For Typescript
-" autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact.tsx
-
-" Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-" autocmd FileType json syntax match Comment +\/\/.\+$+
-" Do not keep netrw buffers around once they are hidden
-autocmd FileType netrw setl bufhidden=delete
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  " autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 " Format with :Format  command
 command! -nargs=0 Format :call CocAction('format')
 
@@ -224,6 +180,18 @@ endfunction
 nmap <silent> <leader>ev :tabedit $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Coc specifics
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use <c-space> to trigger completion.
+"inoremap <silent><expr> <c-space> coc#refresh()
+
+" inoremap <silent><expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -234,6 +202,7 @@ inoremap { {}<ESC>ha
 " Hit F8 to run fixers
 nmap <F8> <Plug>(ale_fix)
 nmap <F9> :Rg <cword><CR>
+
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -254,6 +223,12 @@ nnoremap <leader>c :bd<cr>
 nnoremap <leader>\ :bn<cr>
 nnoremap <leader>t :tabn<CR> " Next Tab
 
+" Ctags import
+nnoremap <Leader>if <Plug>(JsFileImport)
+
+" Configure keybinding for error navigations
+" nmap <silent> <leader>aj :ALENext<cr>
+" nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -286,9 +261,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 set hidden
-
-nmap <silent> <RIGHT> :cnext<CR>
-nmap <silent> <LEFT> :cprev<CR>
 
 " Treat all numbers as decimal
 set nrformats=
@@ -333,9 +305,3 @@ let g:prettier#quickfix_enabled = 1
 "autocmd TextChanged,InsertLeave *.js,*.jsx,*.ts,*.tsx PrettierAsync
 inoremap <special> jj <ESC>
 
-" Overwrite Theme highlights with custom highlights
-function! MyHighlights() abort
-    highlight LineNr guibg=NONE
-endfunction
-
-autocmd ColorScheme * call MyHighlights()
