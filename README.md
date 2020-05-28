@@ -11,8 +11,6 @@ javascript, prettier, eslint, nodejs, yarn up and running, unless you know
 what you doing. In that case, please reach out to me via issues and I will try
 to help you as much as I can but it can take time.
 
-![VIM Configuration](https://user-images.githubusercontent.com/760855/82479131-29af1e80-9afc-11ea-9ca9-07ef3326b5a7.gif)
-
 ### Plugins
 - [Coc] is used for autocomplete, intellisense
 - [ALE] provides linting using Typescript LSP server
