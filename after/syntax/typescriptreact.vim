@@ -201,3 +201,6 @@ let b:current_syntax = 'typescript.tsx'
 let &cpo = s:tsx_cpo
 unlet s:tsx_cpo
 
+highlight Error cterm=bold 
+highlight Todo cterm=bold 
+
