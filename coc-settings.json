@@ -3,6 +3,7 @@
 	"diagnostic.displayByAle": true,
   "tsserver.trace.server": "verbose",
   "eslint.autoFixOnSave": false,
+	"coc.preferences.extensionUpdateCheck":"never",
   "eslint.autoFix": false,
-  "eslint.enable": false,
+  "eslint.enable": false
 }
