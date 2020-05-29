@@ -39,7 +39,7 @@ $ sudo apt-get update && sudo apt-get upgrade
 
 ### Wanna give it a try and see how it works?
 
-- Clone this repository recursively.
+- Clone this repository.
 
 ```shell
 $ git clone git@github.com:samundra/dot-vim.git
