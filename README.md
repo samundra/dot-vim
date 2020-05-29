@@ -77,7 +77,11 @@ Open VIM then use `:PlugInstall` to install Plugins
 
 #### Keyboard Shortcuts
 
-`<Leader>` key to ` \ `. So all the shortcut should start with `\` key.
+`<Leader>` key to ` \ `
+So where it says `<Leader>` remember to press `\` key
+
+> :help Leader
+To get information on how <Leader> key works
 
 #### Key Mapping configured to suit my workflow
 
@@ -98,4 +102,3 @@ repository.
 [LightLine]: https://github.com/itchyny/lightline.vim
 [Coc]: https://github.com/neoclide/coc.nvim
 [ALE]: https://github.com/dense-analysis/ale
-
