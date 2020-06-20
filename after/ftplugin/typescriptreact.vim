@@ -1,6 +1,8 @@
 let b:ale_linter_aliases = ['css', 'javascript']
 let b:ale_linters = ['stylelint', 'eslint']
 let b:ale_fixers=['eslint', 'remove_trailing_lines', 'trim_whitespace']
+let b:ale_warn_about_trailing_whitespace = 1
+let b:ale_list_window_size = 10
 
 " inoremap <buffer> <C-s> <esc>yiwi<lt><esc>ea></><esc>hpF>i
 " ---
@@ -18,4 +20,14 @@ let b:ale_fixers=['eslint', 'remove_trailing_lines', 'trim_whitespace']
 
 " " Format
 " setlocal formatprg=npm\ run\ --silent\ format-current-file\ --\ --stdin-filepath\ %
+
+if exists("loaded_matchit")
+    let b:match_ignorecase=0
+    let b:match_words =
+     \  '<:>,' .
+     \  '<\@<=!--:-->,'.
+     \  '<\@<=?\k\+:?>,'.
+     \  '<\@<=\([^ \t>/]\+\)\%(\s\+[^>]*\%([^/]>\|$\)\|>\|$\):<\@<=/\1>,'.
+     \  '<\@<=\%([^ \t>/]\+\)\%(\s\+[^/>]*\|$\):/>'
+endif
 
