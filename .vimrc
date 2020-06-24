@@ -6,73 +6,89 @@ filetype off
 
 call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'peitalin/vim-jsx-typescript'
-  Plug 'HerringtonDarkholme/yats.vim'
-  Plug 'maxmellon/vim-jsx-pretty'
   Plug 'tpope/vim-commentary'
-  Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript']}
-  Plug 'eslint/eslint'
+  Plug 'jremmen/vim-ripgrep'
+  Plug 'samundra/ayu-vim'
+  "Plug 'amadeus/vim-mjml'
   Plug 'dense-analysis/ale'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'SirVer/ultisnips'
-  Plug 'jremmen/vim-ripgrep'
-  Plug 'jparise/vim-graphql'
-  Plug 'romainl/Apprentice'
+  "Plug 'sukima/xmledit'
+  "Plug 'peitalin/vim-jsx-typescript'
+  "Plug 'HerringtonDarkholme/yats.vim'
+  "Plug 'maxmellon/vim-jsx-pretty'
+  "Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript']}
+  "Plug 'eslint/eslint'
+  "Plug 'ludovicchabant/vim-gutentags'
+  "Plug 'SirVer/ultisnips'
+  "Plug 'jparise/vim-graphql'
+  "Plug 'romainl/Apprentice'
+  "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  "Plug 'junegunn/fzf.vim'
+  "Plug 'drewtempelmeyer/palenight.vim'
+  "Plug 'leafgarland/typescript-vim'
 call plug#end()
 
-filetype plugin indent on
+filetype plugin on
 syntax on
+scriptencoding utf-8
 
-set expandtab
-set backup
+"set autoindent
+set nocompatible
+set autoread expandtab backup writebackup showmode wrap linebreak splitbelow splitright
+      \ autoindent smartindent hlsearch incsearch ignorecase smartcase ruler showmatch ttyfast
+      \ number wildmenu timeout cursorline lazyredraw list noerrorbells
 set backupdir=~/.vim/tmp//,.
-set writebackup
 set directory=~/.vim/tmp//,.
 set undodir=~/.vim/tmp//,.
 set laststatus=2
+" enable indentation
+set breakindent
+" ident by an additional 2 characters on wrapped lines, when line >= 40 characters, put 'showbreak' at start of line
+set breakindentopt=shift:2,min:40,sbr
+" append '>>' to indent
+set showbreak=>>>
 set encoding=utf8
 set t_Co=256
-set noshowmode
-set splitbelow splitright
-set nolist
-set wrap
-set linebreak
 set textwidth=78
 set formatoptions=qrnl
 set showtabline=2
 set tabstop=2
 set guioptions-=e
-set autoindent
-set smartindent
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
 set linespace=5
-set ruler
-set showmatch
 set sts=2
 set softtabstop=2
 set shiftwidth=2
-set ttyfast
-set number
 set backspace=indent,eol,start
 set cmdheight=3
-set updatetime=700
+" "idleness" is 2sec
+set updatetime=2000
 set shortmess+=c
 set signcolumn=yes
-scriptencoding utf-8
 set encoding=UTF-8
 set scrolloff=5
-set noerrorbells
 set path-=/usr/include
-set path+=src/**
-set wildmenu
-set wildignore+=*/node_modules/*,*build/*
-set timeout
+set path+=src/**,src/Pages/**,src/Components/**
 set timeoutlen=700
+set wildignore+=*/node_modules/*,*build/*
+set wildignorecase
+set wildmode=list:longest,full
+" Do not search for tags for autocomplete
+set complete-=t
+set completeopt=menuone,longest
+set fillchars=vert:\ ,fold:\  listchars=tab:⎸\ ,nbsp:⎕
+"set listchars=tab:>-,trail:~,extends:>,precedes:<
+set listchars+=tab:>-,trail:-
+" Use Vertical split for VIM diff
+set diffopt+=vertical
+
+" Replace *tsx with ./src/**/*.tsx
+cmap *src ./src/**/*.tsx
+cmap *page ./src/Pages/**/*.tsx
+cmap *comp ./src/Components/**/*.tsx
+
+noremap <F5> :set list!<CR>
+inoremap <F5> <C-o>:set list!<CR>
+cnoremap <F5> <C-c>:set list!<CR>
 
 " Enable mouse use in all modes
 set mouse=a
@@ -84,15 +100,14 @@ if exists('+termguicolors')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
-
 " Change cursor based on Vim mode :help ModeMsg
 " SI - Insert, SR - Replace, EI - Normal or Anything else
 " 1 -> blinking block
 " 2 -> solid block
 " 3 -> blinking underscore
 " 4 -> solid underscore
-" 5 -> blinking vertical bar
-" 6 -> solid vertical bar"
+" 5 -> blinking vertical foo
+" 6 -> solid vertical foo"
 let &t_SI.="\e[5 q"
 let &t_SR.="\e[4 q"
 let &t_EI.="\e[1 q"
@@ -101,13 +116,12 @@ let &t_EI.="\e[1 q"
 
 let g:ale_sign_column_always=1
 let g:ale_linters_explicit=1
-let g:ale_sign_error='❌'
-let g:ale_sign_warning='⚠️'
+" let g:ale_sign_error='❌'
+" let g:ale_sign_warning='⚠️'
 let g:ale_fix_on_save = 1
-let g:ale_lint_delay=700
+let g:ale_lint_delay=1200
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_set_quickfix = 1
+let g:ale_lint_on_insert_leave = 1
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -118,10 +132,14 @@ endfunction
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
+" Autocomplete the menu selection
+inoremap <expr> <Tab> pumvisible() ? "<C-n>" :"<Tab>"
+inoremap <expr> <CR> pumvisible() ? "<C-y>" :"<CR>"
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -132,10 +150,10 @@ function! s:show_documentation()
 endfunction
 
 " Update signature help on jump placeholder.
-autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 " Format with :Format  command
-command! -nargs=0 Format :call CocAction('format')
+" command! -nargs=0 Format :call CocAction('format')
 
 function PreviewWord() abort
   if &previewwindow			" don't do this in the preview window
@@ -201,9 +219,9 @@ nmap <leader>f  <Plug>(coc-format-selected)
 inoremap { {}<ESC>ha
 
 " Hit F8 to run fixers
-nmap <F8> <Plug>(ale_fix)
-nmap <F9> :Rg <cword><CR>
-
+nnoremap <F8> <Plug>(ale_fix)
+"nnoremap <F9> :Rg <cword><CR>
+nmap <F6> :/\v\s$<CR>
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -222,7 +240,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <leader>bl :ls<cr>
 nnoremap <leader>c :bd<cr>
 nnoremap <leader>\ :bn<cr>
-nnoremap <leader>t :tabn<CR> " Next Tab
+nnoremap <leader>t :tabn<CR>
 
 " Ctags import
 nnoremap <Leader>if <Plug>(JsFileImport)
@@ -244,9 +262,6 @@ inoremap <expr><S-TAB> pumvisible() ? "\<CAPS-p>" : "\<C-h>"
 nnoremap <leader>w :w<CR>
 nnoremap ,, :nohl<CR>
 
-packadd! matchit
-
-colorscheme apprentice
 
 nnoremap <Down> <Nop>
 nnoremap <Left> <Nop>
@@ -257,9 +272,9 @@ vnoremap <Left> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Up> <Nop>
 
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<c-k>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 set hidden
 
@@ -278,7 +293,7 @@ let g:ale_completion_tsserver_autoimport =1
 
 " StatusLine Settings
 " function! GitBranch() abort
-"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null|tr -d '\n'")
+"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null<Bar>tr -d '\n'")
 " endfunction
 
 " function! StatuslineGit() abort
@@ -286,23 +301,114 @@ let g:ale_completion_tsserver_autoimport =1
 "   return strlen(l:branchname) > 0?' '.l:branchname.' ': ''
 " endfunction
 
+" Experiment for ALE Liner errors for statusline
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    if (l:counts.total + 0) ==# 0
+      return 'OK'
+    endif
+    return l:counts.total
+endfunction
+
+function! GetGitBranch() abort
+    let l:branch = system('cd '.expand('%:p:h').' && git rev-parse --abbrev-ref HEAD 2>/dev/null|tr -d "\n"')
+    let l:git_branch = !strlen(l:branch) || !isdirectory(expand('%:p:h')) ? '' : l:branch . ' '
+    return printf("%s", git_branch)
+endfunction
+
+" Set custom statusline
 set laststatus=2
-set statusline=%#PmenuSel#%F\ %#SignColumn#%m
+set statusline=
+set statusline+=%#Question#%{GetGitBranch()}
+set statusline+=%#CursorLine#%f\ %#SignColumn#%m
 set statusline+=%=
 set statusline+=%#Question#%y
 set statusline+=%=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=%#CursorColumn#\[%{&fileformat}]\ %p%%\ %4l:%3c
+"set statusline+=%#Todo#\ [E]\ %3{LinterStatus()}
+set statusline+=%#Question#%5{LinterStatus()==#'OK'?'[OK]':''}%*
+set statusline+=%#Todo#%5{LinterStatus()>0?'[E]'.LinterStatus():''}%*
 set statusline+=\  "   "
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " End StatusLine Settings
 set re=0
 
-let g:prettier#autoformat_config_present = 1
-let g:prettier#autoformat_config_files = ['.prettierrc', '.prettierrc.js']
-let g:prettier#exec_cmd_async = 1
-let g:prettier#quickfix_auto_focus = 1
-let g:prettier#quickfix_enabled = 1
+" let g:prettier#autoformat_config_present = 1
+" let g:prettier#autoformat_config_files = ['.prettierrc', '.prettierrc.js']
+" let g:prettier#exec_cmd_async = 1
+" let g:prettier#quickfix_auto_focus = 1
+" let g:prettier#quickfix_enabled = 1
+" autocmd TextChanged,InsertLeave *.js,*.jsx,*.ts,*.tsx PrettierAsync
 
-"autocmd TextChanged,InsertLeave *.js,*.jsx,*.ts,*.tsx PrettierAsync
 inoremap <special> jj <ESC>
+
+map <F4> [I:let nr = input("Which one: ")<foo>exe "normal " . nr ."[\t"<CR>
+
+function! MyHighlights() abort
+  highlight Search guibg=peru guifg=wheat
+  highlight QuickFixLine guibg=peru guifg=wheat
+  highlight CursorLine cterm=NONE guibg=#3d3d3d guifg=wheat
+  highlight CursorLineNr cterm=NONE guibg=#3d3d3d guifg=wheat
+  highlight TabLine cterm=NONE guibg=#4a4a4a guifg=white
+  highlight TabLineFill cterm=reverse guibg=white guifg=#4a4a4a
+  highlight TabLineSel cterm=bold guibg=wheat guifg=black
+  highlight Error cterm=bold
+  highlight Todo cterm=bold
+endfunction
+
+set background=dark
+let ayucolor="mirage" " for mirage version of theme
+colorscheme ayu
+
+augroup customHighLights
+    autocmd!
+    autocmd Colorscheme * call MyHighlights()
+augroup END
+
+" Use smart case in vim-ripgrep
+let g:rg_command = 'rg --vimgrep -S'
+let g:rg_root_types=['.git', 'node_modules', 'vendor']
+
+" The Silver Searcher
+" Use ag over grep
+set grepprg=rg\ --vimgrep
+
+" Copied from https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+function! Grep(...) abort
+    return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+endfunction
+command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
+command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
+
+augroup myquickfix
+    autocmd!
+    autocmd QuickFixCmdPost cgetexpr cwindow
+    autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
+
+" Automatically open quickfix when we have :grep, :lgrep
+" Now we don't have to press enter to return to editor
+" @see https://noahfrederick.com/log/vim-streamlining-grep
+augroup init_quickfix
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
+augroup END
+
+" Manually parse error format for typescript reactjs based projects
+" set errorformat+=%f:\ line\ %l\\,\ col\ %c\\,\ %m,%-G%.%#
+
+" @see https://stackoverflow.com/a/11925400/688924
+" Automatically close HTML like tags Hit <p><Tab>
+inoremap ><Tab> ><Esc>F<lyt>o</<C-r>"><Esc>kJxi
+packadd! matchit
+
+" Work with Splits
+nnoremap <silent> <Leader>1 :exe "vertical resize 30"<CR>
+nnoremap <silent> 9 :vertical res +2<CR>
+nnoremap <silent> 8 :vertical res -2<CR>
 
