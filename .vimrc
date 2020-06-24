@@ -112,12 +112,8 @@ let &t_SI.="\e[5 q"
 let &t_SR.="\e[4 q"
 let &t_EI.="\e[1 q"
 
-"let b:ale_fixers = ['eslint', 'remove_trailing_lines', 'trim_whitespace']
-
 let g:ale_sign_column_always=1
 let g:ale_linters_explicit=1
-" let g:ale_sign_error='❌'
-" let g:ale_sign_warning='⚠️'
 let g:ale_fix_on_save = 1
 let g:ale_lint_delay=1200
 let g:ale_lint_on_text_changed = 'never'
@@ -149,44 +145,38 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Update signature help on jump placeholder.
-"autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-
-" Format with :Format  command
-" command! -nargs=0 Format :call CocAction('format')
-
 function PreviewWord() abort
-  if &previewwindow			" don't do this in the preview window
+  if &previewwindow
     return
   endif
-  let w = expand("<cword>")		" get the word under cursor
-  if w =~ '\a'			" if the word contains a letter
+  let w = expand("<cword>")
+  if w =~ '\a'
 
     " Delete any existing highlight before showing another tag
-    silent! wincmd P			" jump to preview window
-    if &previewwindow			" if we really get there...
-      match none			" delete existing highlight
-      wincmd p			" back to old window
+    silent! wincmd P
+    if &previewwindow
+      match none
+      wincmd p
     endif
 
     " Try displaying a matching tag for the word under the cursor
     try
-       exe "ptag " . w
+      exe "ptag " . w
     catch
       return
     endtry
 
     silent! wincmd P			" jump to preview window
     if &previewwindow		" if we really get there...
-	 if has("folding")
-	   silent! .foldopen		" don't want a closed fold
-	 endif
-	 call search("$", "b")		" to end of previous line
-	 let w = substitute(w, '\\', '\\\\', "")
-	 call search('\<\V' . w . '\>')	" position cursor on match
-	 " Add a match highlight to the word at this position
+      if has("folding")
+        silent! .foldopen		" don't want a closed fold
+      endif
+      call search("$", "b")		" to end of previous line
+      let w = substitute(w, '\\', '\\\\', "")
+      call search('\<\V' . w . '\>')	" position cursor on match
+      " Add a match highlight to the word at this position
       hi previewWord term=bold ctermbg=green guibg=green
-	 exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
+      exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
       wincmd p			" back to old window
     endif
   endif
@@ -203,14 +193,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Use <c-space> to trigger completion.
-"inoremap <silent><expr> <c-space> coc#refresh()
-
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
-
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -221,6 +203,7 @@ inoremap { {}<ESC>ha
 " Hit F8 to run fixers
 nnoremap <F8> <Plug>(ale_fix)
 "nnoremap <F9> :Rg <cword><CR>
+" Search for trailing space and jump to first one
 nmap <F6> :/\v\s$<CR>
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -233,11 +216,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Working with buffers
-nnoremap <leader>bl :ls<cr>
 nnoremap <leader>c :bd<cr>
 nnoremap <leader>\ :bn<cr>
 nnoremap <leader>t :tabn<CR>
@@ -246,8 +227,6 @@ nnoremap <leader>t :tabn<CR>
 nnoremap <Leader>if <Plug>(JsFileImport)
 
 " Configure keybinding for error navigations
-" nmap <silent> <leader>aj :ALENext<cr>
-" nmap <silent> <leader>ak :ALEPrevious<cr>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -291,29 +270,19 @@ let g:ale_cache_executable_check_failures = 1
 " Autoimport files from external module
 let g:ale_completion_tsserver_autoimport =1
 
-" StatusLine Settings
-" function! GitBranch() abort
-"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null<Bar>tr -d '\n'")
-" endfunction
-
-" function! StatuslineGit() abort
-"   let l:branchname = GitBranch()
-"   return strlen(l:branchname) > 0?' '.l:branchname.' ': ''
-" endfunction
-
 " Experiment for ALE Liner errors for statusline
 function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    if (l:counts.total + 0) ==# 0
-      return 'OK'
-    endif
-    return l:counts.total
+  let l:counts = ale#statusline#Count(bufnr(''))
+  if (l:counts.total + 0) ==# 0
+    return 'OK'
+  endif
+  return l:counts.total
 endfunction
 
 function! GetGitBranch() abort
-    let l:branch = system('cd '.expand('%:p:h').' && git rev-parse --abbrev-ref HEAD 2>/dev/null|tr -d "\n"')
-    let l:git_branch = !strlen(l:branch) || !isdirectory(expand('%:p:h')) ? '' : l:branch . ' '
-    return printf("%s", git_branch)
+  let l:branch = system('cd '.expand('%:p:h').' && git rev-parse --abbrev-ref HEAD 2>/dev/null|tr -d "\n"')
+  let l:git_branch = !strlen(l:branch) || !isdirectory(expand('%:p:h')) ? '' : l:branch . ' '
+  return printf("%s", git_branch)
 endfunction
 
 " Set custom statusline
@@ -325,7 +294,6 @@ set statusline+=%=
 set statusline+=%#Question#%y
 set statusline+=%=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=%#CursorColumn#\[%{&fileformat}]\ %p%%\ %4l:%3c
-"set statusline+=%#Todo#\ [E]\ %3{LinterStatus()}
 set statusline+=%#Question#%5{LinterStatus()==#'OK'?'[OK]':''}%*
 set statusline+=%#Todo#%5{LinterStatus()>0?'[E]'.LinterStatus():''}%*
 set statusline+=\  "   "
@@ -336,13 +304,6 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " End StatusLine Settings
 set re=0
-
-" let g:prettier#autoformat_config_present = 1
-" let g:prettier#autoformat_config_files = ['.prettierrc', '.prettierrc.js']
-" let g:prettier#exec_cmd_async = 1
-" let g:prettier#quickfix_auto_focus = 1
-" let g:prettier#quickfix_enabled = 1
-" autocmd TextChanged,InsertLeave *.js,*.jsx,*.ts,*.tsx PrettierAsync
 
 inoremap <special> jj <ESC>
 
@@ -365,8 +326,8 @@ let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
 
 augroup customHighLights
-    autocmd!
-    autocmd Colorscheme * call MyHighlights()
+  autocmd!
+  autocmd Colorscheme * call MyHighlights()
 augroup END
 
 " Use smart case in vim-ripgrep
@@ -379,15 +340,15 @@ set grepprg=rg\ --vimgrep
 
 " Copied from https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
 function! Grep(...) abort
-    return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
+  return system(join([&grepprg] + [expandcmd(join(a:000, ' '))], ' '))
 endfunction
 command! -nargs=+ -complete=file_in_path -bar Grep  cgetexpr Grep(<f-args>)
 command! -nargs=+ -complete=file_in_path -bar LGrep lgetexpr Grep(<f-args>)
 
 augroup myquickfix
-    autocmd!
-    autocmd QuickFixCmdPost cgetexpr cwindow
-    autocmd QuickFixCmdPost lgetexpr lwindow
+  autocmd!
+  autocmd QuickFixCmdPost cgetexpr cwindow
+  autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 
 " Automatically open quickfix when we have :grep, :lgrep
