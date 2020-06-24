@@ -1,9 +1,9 @@
 {
   "coc.preferences.colorSupport": false,
-	"diagnostic.displayByAle": true,
+  "diagnostic.displayByAle": true,
   "tsserver.trace.server": "verbose",
   "eslint.autoFixOnSave": false,
-	"coc.preferences.extensionUpdateCheck":"never",
+  "coc.preferences.extensionUpdateCheck":"never",
   "eslint.autoFix": false,
   "eslint.enable": false
 }
