@@ -23,3 +23,5 @@ endfunction
 
 autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
 autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
+
+nnoremap <silent> <buffer> o <CR><C-w>p

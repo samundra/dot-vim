@@ -33,7 +33,7 @@ set breakindent
 set breakindentopt=shift:2,min:40,sbr
 set showbreak=»»»
 set encoding=utf8
-set t_Co=256
+"set t_Co=256
 set textwidth=78
 set formatoptions=qrnl
 set showtabline=2
@@ -65,10 +65,10 @@ set fillchars=vert:\ ,fold:\  listchars=tab:⎸\ ,nbsp:⎕
 set listchars+=tab:>-,trail:-
 " Use Vertical split for VIM diff
 set diffopt+=vertical
+set clipboard=unnamed
 
 set mouse=a
 set ttymouse=xterm
-set term=xterm-256color
 
 " Replace *src with ./src/**/*.tsx in command mode
 " `:find text *src` will become `:find text ./src/**/*.tsx`
