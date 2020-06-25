@@ -4,9 +4,10 @@
 "set statusline=%t%{exists('w:quickfix_title')?#StatusLine#w:quickfix_title:''}\%=%-15(%l,%c%V%)\%P
 "set statusline+=%t%#PmenuSel#Sample
 "set statusline=%t%#Title#%{exists('w:quickfix_title')?w:quickfix_title:''}
-setlocal statusline=
-setlocal statusline+=\ 
-setlocal statusline+=%#QuickFixLine#%-10t%#Question#%34{exists('w:quickfix_title')?'\ '.w:quickfix_title:''}
+setlocal stl=
+setlocal stl+=\ 
+"setlocal statusline+=%#QuickFixLine#%-10t%#Question#%34{exists('w:quickfix_title')?'\ '.w:quickfix_title:''}
+setlocal stl+=%t%{exists('w:quickfix_title')?\ '\ '.w:quickfix_title\ :\ ''}\ %=%-15(%l,%c%V%)\ %P
 
 function! <SID>OpenQuickfix(new_split_cmd)
   " 1. the current line is the result idx as we are in the quickfix
@@ -22,4 +23,3 @@ endfunction
 
 autocmd FileType qf nnoremap <buffer> <C-v> :call <SID>OpenQuickfix("vnew")<CR>
 autocmd FileType qf nnoremap <buffer> <C-x> :call <SID>OpenQuickfix("split")<CR>
-
